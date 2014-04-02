@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- Console -->
+	<bean id="sqlHandler" class="org.dbconsoleclient2.SqlHandler">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="sqlObservableConsole" class="org.dbconsoleclient2.SqlObservableConsole">
+		<property name="observer" ref="sqlHandler"/>
+	</bean>
+	
+	<!-- DB -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost/mkyongjava1" />
+		<property name="username" value="tpp" />
+		<property name="password" value="tpp123" />
+	</bean>
+	<bean id="customerDAO" class="org.dbconsoleclient1.ConnectionStatementDecorator">
+		<constructor-arg><ref bean="dataSource"/></constructor-arg>
+		<constructor-arg>
+			<bean class="org.dbconsoleclient1.dao.impl.CustomerStatementDAO" />
+		</constructor-arg>
+	</bean>
+	<!-- 
+	<bean id="customerStatmentDAO" class="org.dbconsoleclient1.dao.impl.CustomerStatementDAO">
+	</bean>
+	<bean id="customerDAO" class="org.dbconsoleclient1.ConnectionStatementDecorator">
+		<property name="dataSource" ref="dataSource" />
+		<property name="tableDAO" ref="customerStatmentDAO"  />
+	</bean>
+	<bean id="customerDAO" class="org.dbconsoleclient1.ConnectionStatementDecorator">
+		<property name="dataSource" ref="dataSource" />
+		<property name="tableDAO">
+			<bean class="org.dbconsoleclient1.dao.impl.CustomerStatementDAO" />
+		</property>
+	</bean>
+	 -->
+</beans>
