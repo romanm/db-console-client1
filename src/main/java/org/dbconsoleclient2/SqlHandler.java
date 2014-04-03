@@ -16,7 +16,10 @@ public class SqlHandler implements Observer{
 	private void update(SqlObservableConsole sqlConsole, String sql) {
 //		System.out.println("\n Received Response: " + sql );
 		System.out.println(" < Received Response: " + sql );
-		if("quit".equals(sql.toLowerCase())){
+		if(
+				"quit".equals(sql.toLowerCase())
+				||"<".equals(sql.toLowerCase())
+				){
 			sqlConsole.quit();
 			System.out.println("bey!");
 		}else{

@@ -15,14 +15,9 @@ public abstract class DecoratedTableDAO implements TableDAO {
 	}
 
 	public void persist(Customer tableObject) throws SQLException {
-		System.out.println(1001);
-		System.out.println(getClass());
-		System.out.println(decoratedTableDAO.getClass());
 		decoratedTableDAO.persist(tableObject);
 	}
 	public void insert(Customer tableObject) throws SQLException {
-		System.out.println(decoratedTableDAO);
-		System.out.println(tableObject);
 		decoratedTableDAO.insert(tableObject);
 	}
 
